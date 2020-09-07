@@ -8,6 +8,7 @@ import mylogin from '@/view/home/login'
 import regist from '@/view/home/register'
 import home from '@/view/home/home'
 import userList from '@/view/category/user/user'
+import jobList from '@/view/category/job/job'
 import roleList from '@/view/category/role/role'
 import permissionList from '@/view/category/permission/permission'
 import groupList from '@/view/category/group/group'
@@ -49,6 +50,14 @@ const router = new Router({
       path: '/role/list',
       name: 'roleList',
       component: roleList,
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/job/list',
+      name: 'jobList',
+      component: jobList,
       meta: {
         keepAlive: true
       }

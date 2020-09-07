@@ -10,10 +10,10 @@
             class="demo-form-inline"
           >
             <el-form-item label="姓名">
-              <el-input v-model="formInline.user" placeholder="姓名"></el-input>
+              <el-input v-model="formInline.name" placeholder="名称"></el-input>
             </el-form-item>
-            <el-form-item label="机构">
-              <el-select v-model="formInline.region" placeholder="机构">
+            <el-form-item label="类型">
+              <el-select v-model="formInline.type" placeholder="类型">
                 <el-option label="机构一" value="shanghai"></el-option>
                 <el-option label="机构二" value="beijing"></el-option>
               </el-select>
@@ -22,7 +22,7 @@
               <el-button type="primary" icon="el-icon-search" @click="onSubmit">查询</el-button>
             </el-form-item>
             <el-form-item>
-              <el-button type="info" icon="el-icon-plus" @click="userEdit(null)">添加</el-button>
+              <el-button type="info" icon="el-icon-plus" @click="jobEdit(null)">添加</el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -39,13 +39,13 @@
       <el-table-column label="操作" width="180">
         <template slot-scope="scope">
           <el-button
-            @click="userEdit(scope.$index, scope.row)"
+            @click="jobEdit(scope.$index, scope.row)"
             icon="el-icon-edit"
             type="text"
             size="small"
           >编辑</el-button>
           <el-button
-            @click="userDelete(scope.$index, scope.row)"
+            @click="jobDelete(scope.$index, scope.row)"
             icon="el-icon-circle-close"
             type="text"
             size="small"
@@ -53,12 +53,13 @@
         </template>
       </el-table-column>
       <el-table-column prop="id" label="序号" width="90"></el-table-column>
-      <el-table-column prop="name" label="姓名" width="180"></el-table-column>
-      <el-table-column prop="roleName" label="角色" width="180"></el-table-column>
-      <el-table-column prop="jobName" label="职务" width="180"></el-table-column>
-      <el-table-column prop="orgName" label="机构" width="180"></el-table-column>
-      <el-table-column prop="sex" label="性别" :formatter="sexFormat"></el-table-column>
-      <el-table-column prop="entryTime" label="日期" width="180" :formatter="dateFormat"></el-table-column>
+      <el-table-column prop="name" label="名称" width="180"></el-table-column>
+      <el-table-column prop="salary" label="薪资" width="180"></el-table-column>
+      <el-table-column prop="type" label="类型" width="180"></el-table-column>
+      <el-table-column prop="description" label="描述" width="180"></el-table-column>
+      
+      <el-table-column prop="addTime" label="日期" width="180" :formatter="dateFormat"></el-table-column>
+      
     </el-table>
     <!-- page -->
     <div align="center">
@@ -88,8 +89,8 @@ export default {
     return {
       tableData: [],
       formInline: {
-        user: "",
-        region: "",
+        name: "",
+        type: ""
       }, //默认每页数据量
       editProp: false,
       pageSize: 10,
@@ -106,10 +107,10 @@ export default {
     initUserData: function () {
       this.axios({
         method: "post",
-        url: "/smbus/user/selectUserListAll",
+        url: "/smbus/job/selectJobPage",
         data: {
           data: {
-            name: this.formInline.user,
+            name: this.formInline.name,
           },
           page: {
             page: this.currentPage,
@@ -165,7 +166,7 @@ export default {
         return "男";
       }
     },
-    userDelete: function (index, row) {
+    jobDelete: function (index, row) {
       //普通调用方式
       this.$confirm("将删除" + row.name + "用户, 是否确定?", "提示", {
         confirmButtonText: "确定",
@@ -182,7 +183,7 @@ export default {
           });
         });
     },
-    userEdit: function (index, row) {
+    jobEdit: function (index, row) {
       this.editProp = true;
       if (row != null) {
         this.$nextTick(() => {

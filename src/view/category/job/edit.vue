@@ -78,8 +78,8 @@
         <el-input type="textarea" v-model="form.desc"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">{{editName}}</el-button>
-        <el-button @click="cancelButton()">取消</el-button>
+        <el-button type="primary" @click="onSubmit">立即创建</el-button>
+        <el-button>取消</el-button>
       </el-form-item>
     </el-form>
   </el-dialog>
@@ -98,7 +98,6 @@ export default {
         status: "",
         entryTime: "",
       },
-      editName:'',
       editProp: false,
     };
   },
@@ -108,15 +107,7 @@ export default {
     },
     init(id) {
       this.editProp = true;
-      if(id==null){
-        this.editName="创建";
-      }else{
-        this.editName="保存";
-      }
     },
-    cancelButton(){
-      this.editProp = false;
-    }
   },
 };
 </script>
