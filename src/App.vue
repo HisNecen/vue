@@ -18,8 +18,13 @@
         <el-main>
           <!-- Body -->
           <router-view></router-view>
+
+          <footer-bottom></footer-bottom>
+         
+
         </el-main>
       </el-container>
+      
     </el-container>
 
     <!-- 登录页 -->
@@ -30,11 +35,13 @@
 <script>
 import header from "./view/common/nav";
 import left from "./view/common/header";
+import footer from "./view/common/footer"
 
 export default {
   components: {
     headerNav: header,
     left: left,
+    footerBottom:footer
   },
 };
 </script>

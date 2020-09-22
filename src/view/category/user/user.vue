@@ -8,6 +8,7 @@
             :inline="true"
             :model="formInline"
             class="demo-form-inline"
+            style="text-align: right;"
           >
             <el-form-item label="姓名">
               <el-input v-model="formInline.user" placeholder="姓名"></el-input>
@@ -106,7 +107,7 @@ export default {
     initUserData: function () {
       this.axios({
         method: "post",
-        url: "/smbus/user/selectUserListAll",
+        url: "/myoa/smbus/user/selectUserListAll",
         data: {
           data: {
             name: this.formInline.user,

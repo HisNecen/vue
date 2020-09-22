@@ -11,8 +11,8 @@
           </el-form-item>
         </el-col>
         <el-col>
-          <el-form-item label="薪资">
-            <el-input v-model="form.salary"></el-input>
+          <el-form-item label="账号">
+            <el-input v-model="form.contactNum"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
@@ -20,9 +20,9 @@
       <el-row>
         <el-col>
           <el-form-item label="类型" :inline="true">
-            <el-select v-model="dicType.id" placeholder="请选择活动区域">
+            <el-select v-model="contactType.id" placeholder="请选择活动区域">
               <el-option
-                v-for="item in dicTypeList"
+                v-for="item in contactTypeList"
                 :key="item.id"
                 :value="item.id"
                 :label="item.name"
@@ -33,7 +33,7 @@
       </el-row>
 
       <el-form-item label="个人说明">
-        <el-input type="textarea" v-model="form.description"></el-input>
+        <el-input type="textarea" v-model="form.desc"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">{{editName}}</el-button>
@@ -43,21 +43,21 @@
   </el-dialog>
 </template>
 <script>
-import job from "./job";
+import supplier from "./supplier"
 export default {
   data() {
     return {
       form: {
         id: "",
         name: "",
-        type: "",
-        salary: "",
-        description: "",
+        contactNum: "",
+        contactType: "",
+        desc: "",
       },
       editName: "",
       editProp: false,
-      dicTypeList: [],
-      dicType: {
+      contactTypeList: [],
+      contactType: {
         id: "",
         name: "",
         type: "",
@@ -66,17 +66,17 @@ export default {
     };
   },
   created: function () {
-    this.initDic("2");
+    this.initDic("1");
   },
   methods: {
     onSubmit() {
       if (this.form.id == null) {
-        this.addJob();
+        this.addSupllier();
       } else {
-        this.updateJob();
+        this.updateSupllier();
       }
       this.cancelButton();
-      this.$parent.initJobData();
+      this.$parent.initSupplierData();
     },
     init(id) {
       this.editProp = true;
@@ -104,14 +104,14 @@ export default {
           },
         },
       }).then((res) => {
-        this.dicTypeList = res.data.data.dicList;
-        this.dicType.id = this.dicTypeList[0].id;
+        this.contactTypeList = res.data.data.dicList;
+        this.contactType.id = this.contactTypeList[0].id;
       });
     },
     initData(id) {
       this.axios({
         method: "post",
-        url: "/myoa/smbus/job/selectJob",
+        url: "/myoa/smbus/supplire/selectSupplire",
         data: {
           data: {
             id: id,
@@ -119,7 +119,7 @@ export default {
         },
       }).then((res) => {
         this.form = res.data.data;
-        this.dicType.id = this.form.type;
+        this.contactType.id = this.form.contactType;
       });
     },
     reset() {
@@ -127,47 +127,48 @@ export default {
         form: {
           id: "",
           name: "",
-          type: "",
-          salary: "",
-          description: "",
+          contactNum: "",
+          contactType: "",
+          desc: "",
         },
       };
     },
-    addJob() {
+    addSupllier() {
       this.axios({
         method: "post",
-        url: "/myoa/smbus/job/saveJob",
+        url: "/myoa/smbus/supplire/saveSupplire",
         data: {
           data: {
             name: this.form.name,
-            salary: this.form.salary+"",
-            type: this.dicType.id,
-            description: this.form.description,
+            contactNum: this.form.contactNum,
+            contactType: this.contactType.id,
+            desc: this.form.desc,
           },
         },
       }).then((res) => {
-        if (res.status == 200) {
+        if(res.status==200){
           this.$message("操作成功！");
         }
       });
     },
-    updateJob() {
+    updateSupllier() {
       this.axios({
         method: "post",
-        url: "/myoa/smbus/job/updateJob",
+        url: "/myoa/smbus/supplire/updateSupplire",
         data: {
           data: {
             id: this.form.id,
             name: this.form.name,
-            salary: this.form.salary+"",
-            type: this.dicType.id,
-            description: this.form.description,
+            contactNum: this.form.contactNum,
+            contactType: this.contactType.id,
+            desc: this.form.desc,
           },
         },
       }).then((res) => {
-        if (res.status == 200) {
+        if(res.status==200){
           this.$message("操作成功！");
         }
+        
       });
     },
   },

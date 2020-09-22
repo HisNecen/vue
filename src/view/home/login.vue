@@ -44,7 +44,7 @@ export default {
     onSubmit() {
       axios({
         method: "post",
-        url: "/oauth/token",
+        url: "/myoa/smbus/oauth/token",
         data: {
           username: this.form.username,
           password: this.form.password,

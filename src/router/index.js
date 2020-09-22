@@ -13,6 +13,8 @@ import roleList from '@/view/category/role/role'
 import permissionList from '@/view/category/permission/permission'
 import groupList from '@/view/category/group/group'
 import activitiList from '@/view/category/activiti/activiti'
+import supplierList from '@/view/category/supplier/supplier'
+import appList from '@/view/category/applications/app'
 
 Vue.use(Router)
 
@@ -85,7 +87,24 @@ const router = new Router({
       meta: {
         keepAlive: true
       }
-    },{
+    },
+    {
+      path: '/supplier/list',
+      name: 'supplierList',
+      component: supplierList,
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/app/list',
+      name: 'appList',
+      component: appList,
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
       path:'*',
       name:'404',
       component:mylogin,

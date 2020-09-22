@@ -11,15 +11,9 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/oauth': {
-        target: "http://localhost:9090", // API服务所在IP及端口号
+      '/myoa': {
+        target: "http://localhost:9091", // API服务所在IP及端口号
         changeOrigin: true // 如果设置为true,那么本地会虚拟一个服务器接收你的请求并代你发送该请求，这样就不会有跨域问题（只适合开发环境）
-      },
-      '/smbus':{
-        target: "http://localhost:9090"
-      },
-      '/open':{
-        target:"http://localhost:9090"
       }
     },
 

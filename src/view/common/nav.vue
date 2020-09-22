@@ -13,7 +13,7 @@
       <el-menu-item index="/user/list">
         <i class="el-icon-s-platform"></i>服务器
       </el-menu-item>
-      <el-menu-item index="/role/list">
+      <el-menu-item index="/supplier/list">
         <i class="el-icon-goods"></i>供应商
       </el-menu-item>
     </el-submenu>
@@ -44,6 +44,9 @@
       </el-menu-item>
       <el-menu-item index="/role/list">
         <i class="el-icon-s-management"></i>角色
+      </el-menu-item>
+      <el-menu-item index="/app/list">
+        <i class="el-icon-caret-right"></i>应用
       </el-menu-item>
       <el-menu-item index="/permission/list">
         <i class="el-icon-caret-right"></i>权限
