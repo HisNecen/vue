@@ -56,4 +56,11 @@ export default {
   margin-top: 0px;
   height: 100%;
 }
+.tip {
+    padding: 8px 16px;
+    background-color: #ecf8ff;
+    border-radius: 4px;
+    border-left: 5px solid #50bfff;
+    margin: 0 0 20px 0;
+}
 </style>

@@ -10,7 +10,28 @@
             <el-input v-model="form.name"></el-input>
           </el-form-item>
         </el-col>
+        <el-col>
+          <el-form-item label="账号">
+            <el-input v-model="form.contactNum"></el-input>
+          </el-form-item>
+        </el-col>
       </el-row>
+
+      <el-row>
+        <el-col>
+          <el-form-item label="类型" :inline="true">
+            <el-select v-model="contactType.id" placeholder="请选择活动区域">
+              <el-option
+                v-for="item in contactTypeList"
+                :key="item.id"
+                :value="item.id"
+                :label="item.name"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+      </el-row>
+
       <el-form-item label="个人说明">
         <el-input type="textarea" v-model="form.desc"></el-input>
       </el-form-item>
@@ -22,29 +43,40 @@
   </el-dialog>
 </template>
 <script>
-import app from "./app"
+import supplier from "./role"
 export default {
   data() {
     return {
       form: {
         id: "",
         name: "",
+        contactNum: "",
+        contactType: "",
         desc: "",
       },
       editName: "",
       editProp: false,
+      contactTypeList: [],
+      contactType: {
+        id: "",
+        name: "",
+        type: "",
+        value: "",
+      },
     };
   },
-  
+  created: function () {
+    this.initDic("1");
+  },
   methods: {
     onSubmit() {
       if (this.form.id == null) {
-        this.addApp();
+        this.addSupllier();
       } else {
-        this.updateApp();
+        this.updateSupllier();
       }
       this.cancelButton();
-      this.$parent.initAppData();
+      this.$parent.initSupplierData();
     },
     init(id) {
       this.editProp = true;
@@ -62,10 +94,24 @@ export default {
     cancelButton() {
       this.editProp = false;
     },
+    initDic(dicType) {
+      this.axios({
+        method: "post",
+        url: "/myoa/smbus/dic/dic/selectDicInType",
+        data: {
+          data: {
+            type: dicType,
+          },
+        },
+      }).then((res) => {
+        this.contactTypeList = res.data.data.dicList;
+        this.contactType.id = this.contactTypeList[0].id;
+      });
+    },
     initData(id) {
       this.axios({
         method: "post",
-        url: "/myoa/smbus/app/selectApp",
+        url: "/myoa/smbus/supplire/selectSupplire",
         data: {
           data: {
             id: id,
@@ -73,6 +119,7 @@ export default {
         },
       }).then((res) => {
         this.form = res.data.data;
+        this.contactType.id = this.form.contactType;
       });
     },
     reset() {
@@ -80,18 +127,22 @@ export default {
         form: {
           id: "",
           name: "",
+          contactNum: "",
+          contactType: "",
           desc: "",
         },
       };
     },
-    addApp() {
+    addSupllier() {
       this.axios({
         method: "post",
-        url: "/myoa/smbus/app/saveApp",
+        url: "/myoa/smbus/supplire/saveSupplire",
         data: {
           data: {
             name: this.form.name,
-            description: this.form.desc,
+            contactNum: this.form.contactNum,
+            contactType: this.contactType.id,
+            desc: this.form.desc,
           },
         },
       }).then((res) => {
@@ -100,15 +151,17 @@ export default {
         }
       });
     },
-    updateApp() {
+    updateSupllier() {
       this.axios({
         method: "post",
-        url: "/myoa/smbus/app/updateApp",
+        url: "/myoa/smbus/supplire/updateSupplire",
         data: {
           data: {
             id: this.form.id,
             name: this.form.name,
-            description: this.form.desc,
+            contactNum: this.form.contactNum,
+            contactType: this.contactType.id,
+            desc: this.form.desc,
           },
         },
       }).then((res) => {

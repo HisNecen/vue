@@ -46,7 +46,7 @@
         <i class="el-icon-s-management"></i>角色
       </el-menu-item>
       <el-menu-item index="/app/list">
-        <i class="el-icon-caret-right"></i>应用
+        <i class="el-icon-monitor"></i>应用
       </el-menu-item>
       <el-menu-item index="/permission/list">
         <i class="el-icon-caret-right"></i>权限

@@ -1,9 +1,9 @@
 <template>
-  <div id="home">
+  <div id="home" style="height:78%;">
     <el-progress :text-inside="true" :stroke-width="26" :percentage="70"></el-progress>
-    <el-progress :text-inside="true" :stroke-width="24" :percentage="100" status="success"></el-progress>
-    <el-progress :text-inside="true" :stroke-width="22" :percentage="80" status="warning"></el-progress>
-    <el-progress :text-inside="true" :stroke-width="20" :percentage="50" status="exception"></el-progress>
+    <el-calendar v-model="value" >
+    </el-calendar>
+    
   </div>
 </template>
 
@@ -13,6 +13,11 @@ import myheader from ".././common/header";
 export default {
   name: "home",
   components: {},
+    data() {
+      return {
+        value: new Date()
+      }
+    }
 };
 </script>
 
