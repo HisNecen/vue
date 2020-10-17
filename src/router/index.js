@@ -1,20 +1,21 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import store from './../store/index'
+import Vue from 'vue';
+import Router from 'vue-router';
+import store from './../store/index';
 // import HelloWorld from '@/components/HelloWorld'
 // import form from '@/demo/form'
 // import home from '@/home/home'
-import mylogin from '@/view/home/login'
-import regist from '@/view/home/register'
-import home from '@/view/home/home'
-import userList from '@/view/category/user/user'
-import jobList from '@/view/category/job/job'
-import roleList from '@/view/category/role/role'
-import permissionList from '@/view/category/permission/permission'
-import groupList from '@/view/category/group/group'
-import activitiList from '@/view/category/activiti/activiti'
-import supplierList from '@/view/category/supplier/supplier'
-import appList from '@/view/category/applications/app'
+import mylogin from '@/view/home/login';
+import regist from '@/view/home/register';
+import home from '@/view/home/home';
+import userList from '@/view/category/user/user';
+import jobList from '@/view/category/job/job';
+import roleList from '@/view/category/role/role';
+import permissionList from '@/view/category/permission/permission';
+import groupList from '@/view/category/group/group';
+import activitiList from '@/view/category/activiti/activiti';
+import supplierList from '@/view/category/supplier/supplier';
+import appList from '@/view/category/applications/app';
+import assets from '@/view/category/assets/assets_home';
 
 Vue.use(Router)
 
@@ -100,6 +101,14 @@ const router = new Router({
       path: '/app/list',
       name: 'appList',
       component: appList,
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/assets/home',
+      name: 'assets',
+      component: assets,
       meta: {
         keepAlive: true
       }

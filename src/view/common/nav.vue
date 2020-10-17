@@ -1,7 +1,7 @@
 <template>
   <el-menu theme="dark" mode="horizontal" class="el-menu-admin" @select="handleSelect">
     <el-menu-item index="/">
-      <el-tag effect="dark">vue正式管理系统-(v1.0)</el-tag>
+      <el-tag effect="dark">OA-办公管理系统-(v1.0)</el-tag>
     </el-menu-item>
     <el-menu-item index="/home">
       <i class="el-icon-s-home"></i>首页
@@ -30,7 +30,7 @@
       <el-menu-item index="/permission/list">
         <i class="el-icon-s-data"></i>报表
       </el-menu-item>
-      <el-menu-item index="/job/list">
+      <el-menu-item index="/assets/home">
         <i class="el-icon-office-building"></i>资产
       </el-menu-item>
     </el-submenu>

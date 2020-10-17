@@ -56,7 +56,7 @@
       <el-table-column prop="id" label="序号" width="90"></el-table-column>
       <el-table-column prop="name" label="姓名" width="180"></el-table-column>
       <el-table-column prop="roleName" label="角色" width="180"></el-table-column>
-      <el-table-column prop="jobName" label="职务" width="180"></el-table-column>
+      <el-table-column prop="smbusJob.name" label="职务" width="180"></el-table-column>
       <el-table-column prop="orgName" label="机构" width="180"></el-table-column>
       <el-table-column prop="sex" label="性别" :formatter="sexFormat"></el-table-column>
       <el-table-column prop="entryTime" label="日期" width="180" :formatter="dateFormat"></el-table-column>

@@ -1,5 +1,10 @@
 <template>
-  <el-dialog title="用户信息" class="userEidt" :close-on-click-modal="false" :visible.sync="editProp">
+  <el-dialog
+    title="用户信息"
+    class="userEidt"
+    :close-on-click-modal="false"
+    :visible.sync="editProp"
+  >
     <el-form ref="form" :model="form" label-width="80px">
       <el-form-item label="标号" hidden>
         <el-input v-model="form.id"></el-input>
@@ -10,19 +15,14 @@
             <el-input v-model="form.name"></el-input>
           </el-form-item>
         </el-col>
-        <el-col>
-          <el-form-item label="账号">
-            <el-input v-model="form.contactNum"></el-input>
-          </el-form-item>
-        </el-col>
       </el-row>
 
       <el-row>
-        <el-col>
-          <el-form-item label="类型" :inline="true">
-            <el-select v-model="contactType.id" placeholder="请选择活动区域">
+        <el-col :span="12">
+          <el-form-item label="级别" :inline="true">
+            <el-select v-model="levelDic.id" placeholder="请选择活动区域">
               <el-option
-                v-for="item in contactTypeList"
+                v-for="item in levelDicList"
                 :key="item.id"
                 :value="item.id"
                 :label="item.name"
@@ -30,34 +30,40 @@
             </el-select>
           </el-form-item>
         </el-col>
+        <el-col :span="12">
+          <el-form-item label="状态">
+            <el-radio v-model="form.status" label="1">正常</el-radio>
+            <el-radio v-model="form.status" label="0">禁用</el-radio>
+          </el-form-item>
+        </el-col>
       </el-row>
 
       <el-form-item label="个人说明">
-        <el-input type="textarea" v-model="form.desc"></el-input>
+        <el-input type="textarea" v-model="form.description"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">{{editName}}</el-button>
+        <el-button type="primary" @click="onSubmit">{{ editName }}</el-button>
         <el-button @click="cancelButton()">取消</el-button>
       </el-form-item>
     </el-form>
   </el-dialog>
 </template>
 <script>
-import supplier from "./role"
+import Role from "./role";
 export default {
   data() {
     return {
       form: {
         id: "",
         name: "",
-        contactNum: "",
-        contactType: "",
-        desc: "",
+        status: "1",
+        levelDic: "",
+        description: "",
       },
       editName: "",
       editProp: false,
-      contactTypeList: [],
-      contactType: {
+      levelDicList: [],
+      levelDic: {
         id: "",
         name: "",
         type: "",
@@ -66,17 +72,17 @@ export default {
     };
   },
   created: function () {
-    this.initDic("1");
+    this.initDic("16");
   },
   methods: {
     onSubmit() {
       if (this.form.id == null) {
-        this.addSupllier();
+        this.addRole();
       } else {
-        this.updateSupllier();
+        this.updateRole();
       }
       this.cancelButton();
-      this.$parent.initSupplierData();
+      this.$parent.initRoleData();
     },
     init(id) {
       this.editProp = true;
@@ -88,7 +94,7 @@ export default {
       if (id != null) {
         this.initData(id);
       } else {
-        this.form = this.reset();
+        this.reset();
       }
     },
     cancelButton() {
@@ -104,14 +110,14 @@ export default {
           },
         },
       }).then((res) => {
-        this.contactTypeList = res.data.data.dicList;
-        this.contactType.id = this.contactTypeList[0].id;
+        this.levelDicList = res.data.data.dicList;
+        this.levelDic.id = this.levelDicList[0].id;
       });
     },
     initData(id) {
       this.axios({
         method: "post",
-        url: "/myoa/smbus/supplire/selectSupplire",
+        url: "/myoa/smbus/role/selectRole",
         data: {
           data: {
             id: id,
@@ -119,56 +125,55 @@ export default {
         },
       }).then((res) => {
         this.form = res.data.data;
-        this.contactType.id = this.form.contactType;
+        this.form.status = res.data.data.status+"";
+        this.levelDic.id = this.form.levelDic.id;
       });
     },
     reset() {
-      return {
-        form: {
-          id: "",
+        this.form={
+          id: null,
           name: "",
-          contactNum: "",
-          contactType: "",
-          desc: "",
-        },
-      };
+          status: "1",
+          levelDic: 78,
+          description: "",
+        }
+        this.levelDic.id=78;
     },
-    addSupllier() {
+    addRole() {
       this.axios({
         method: "post",
-        url: "/myoa/smbus/supplire/saveSupplire",
+        url: "/myoa/smbus/role/saveRole",
         data: {
           data: {
             name: this.form.name,
-            contactNum: this.form.contactNum,
-            contactType: this.contactType.id,
-            desc: this.form.desc,
+            status: parseInt(this.form.status),
+            level: this.levelDic.id,
+            description: this.form.description,
           },
         },
       }).then((res) => {
-        if(res.status==200){
+        if (res.status == 200) {
           this.$message("操作成功！");
         }
       });
     },
-    updateSupllier() {
+    updateRole() {
       this.axios({
         method: "post",
-        url: "/myoa/smbus/supplire/updateSupplire",
+        url: "/myoa/smbus/role/updateRole",
         data: {
           data: {
             id: this.form.id,
             name: this.form.name,
-            contactNum: this.form.contactNum,
-            contactType: this.contactType.id,
-            desc: this.form.desc,
+            status: parseInt(this.form.status),
+            level: this.levelDic.id,
+            description: this.form.description,
           },
         },
       }).then((res) => {
-        if(res.status==200){
+        if (res.status == 200) {
           this.$message("操作成功！");
         }
-        
       });
     },
   },
