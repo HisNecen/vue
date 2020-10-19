@@ -70,6 +70,9 @@
               <el-form-item label="菜单名称">
                 <el-input v-model="menuModel.name"></el-input>
               </el-form-item>
+              <el-form-item label="菜单名称">
+                <el-input v-model="menuModel.code"></el-input>
+              </el-form-item>
               <el-form-item label="访问路径">
                 <el-input v-model="menuModel.url"></el-input>
               </el-form-item>
@@ -107,6 +110,7 @@ export default {
         status: "",
         url: "",
         appId: "",
+        code:""
       },
       menuModelParentMenuList: [],
       seconde: false,
@@ -114,7 +118,7 @@ export default {
       defaultProps: {
         children: "childrenList",
         label: function (data, node) {
-          return data.name + " " + data.dic.name;
+          return data.name + " " +data.code+ " " + data.dic.name;
         },
       },
     };
@@ -215,6 +219,7 @@ export default {
             status: status,
             url: this.menuModel.url,
             appId: this.appModel.id,
+            code:this.menuModel.code
           },
         },
       }).then((res) => {
