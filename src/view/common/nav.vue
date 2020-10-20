@@ -1,7 +1,7 @@
 <template>
   <el-menu theme="dark" mode="horizontal" class="el-menu-admin" @select="handleSelect">
     <el-menu-item index="/">
-      <el-tag effect="dark">OA-办公管理系统-(v1.0)</el-tag>
+      <el-tag effect="dark">VUE-ELEMENT(Example)</el-tag>
     </el-menu-item>
     <el-menu-item index="/home">
       <i class="el-icon-s-home"></i>首页
@@ -15,6 +15,9 @@
       </el-menu-item>
       <el-menu-item index="/supplier/list">
         <i class="el-icon-goods"></i>供应商
+      </el-menu-item>
+      <el-menu-item index="/notebook/list">
+        <i class="el-icon-s-opportunity"></i>记事本
       </el-menu-item>
     </el-submenu>
     <el-submenu index="2">

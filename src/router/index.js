@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import store from './../store/index';
+
+import axios from 'axios';
 // import HelloWorld from '@/components/HelloWorld'
 // import form from '@/demo/form'
 // import home from '@/home/home'
@@ -16,6 +18,7 @@ import activitiList from '@/view/category/activiti/activiti';
 import supplierList from '@/view/category/supplier/supplier';
 import appList from '@/view/category/applications/app';
 import assets from '@/view/category/assets/assets_home';
+import notebook from '@/view/category/notes/notebook';
 
 Vue.use(Router)
 
@@ -114,6 +117,14 @@ const router = new Router({
       }
     },
     {
+      path: '/notebook/list',
+      name: 'notebook',
+      component: notebook,
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
       path:'*',
       name:'404',
       component:mylogin,
@@ -142,5 +153,22 @@ const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {
    return originalPush.call(this, location).catch(err => err)
 }
+
+
+//异步请求后，判断token是否过期
+axios.interceptors.response.use(
+  response =>{
+    return response;
+  },
+  error => {
+    if(error.response){
+      switch (error.response.status) {
+        case 401:
+          localStorage.removeItem('Authorization');
+          router.push("/");
+      }
+    }
+  }
+)
 
 export default router

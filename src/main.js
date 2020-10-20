@@ -30,21 +30,6 @@ axios.interceptors.request.use(config => {
   return Promise.reject(error);
 });
 
-//异步请求后，判断token是否过期
-axios.interceptors.response.use(
-  response =>{
-    return response;
-  },
-  error => {
-    if(error.response){
-      switch (error.response.status) {
-        case 401:
-          localStorage.removeItem('Authorization');
-          this.$router.push('/');
-      }
-    }
-  }
-)
 
 
 Vue.prototype.axios = axios;

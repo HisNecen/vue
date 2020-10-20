@@ -23,7 +23,7 @@
               <el-button type="primary" icon="el-icon-search" @click="onSubmit">查询</el-button>
             </el-form-item>
             <el-form-item>
-              <el-button type="info" icon="el-icon-plus" @click="userEdit(null)">添加</el-button>
+              <el-button type="info" icon="el-icon-plus" @click="userEdit(null,null)">添加</el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -37,7 +37,7 @@
       :cell-style="{padding:'0px'}"
       style="width: 100%"
     >
-      <el-table-column label="操作" width="180">
+      <el-table-column label="操作" width="120">
         <template slot-scope="scope">
           <el-button
             @click="userEdit(scope.$index, scope.row)"
@@ -53,11 +53,14 @@
           >删除</el-button>
         </template>
       </el-table-column>
-      <el-table-column prop="id" label="序号" width="90"></el-table-column>
-      <el-table-column prop="name" label="姓名" width="180"></el-table-column>
-      <el-table-column prop="roleName" label="角色" width="180"></el-table-column>
+      <!-- <el-table-column prop="id" label="序号" width="60"></el-table-column> -->
+      <el-table-column prop="name" label="姓名" width="120"></el-table-column>
+      
+      <el-table-column prop="phone" label="电话" width="180"></el-table-column>
       <el-table-column prop="smbusJob.name" label="职务" width="180"></el-table-column>
-      <el-table-column prop="orgName" label="机构" width="180"></el-table-column>
+      <el-table-column prop="smbusOrg.name" label="项目组" width="180"></el-table-column>
+
+      <el-table-column prop="smbusRole.name" label="角色" width="180"></el-table-column>
       <el-table-column prop="sex" label="性别" :formatter="sexFormat"></el-table-column>
       <el-table-column prop="entryTime" label="日期" width="180" :formatter="dateFormat"></el-table-column>
     </el-table>
@@ -174,7 +177,20 @@ export default {
         type: "warning",
       })
         .then(() => {
-          console.log("点击了确认");
+          this.axios({
+            method: "post",
+            url: "/myoa/smbus/user/deleteUser",
+            data: {
+              data: {
+                id: row.id,
+              },
+            },
+          }).then((res) => {
+            if (res.status == 200) {
+              this.$message("删除成功！");
+            }
+            this.initUserData();
+          });
         })
         .catch(() => {
           this.$message({
@@ -184,6 +200,7 @@ export default {
         });
     },
     userEdit: function (index, row) {
+      console.log(row+"-"+index);
       this.editProp = true;
       if (row != null) {
         this.$nextTick(() => {
