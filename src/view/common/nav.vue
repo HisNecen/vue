@@ -62,14 +62,14 @@
     <el-menu-item index="/activiti/list">
       <i class="el-icon-refresh"></i>流程
     </el-menu-item>
-    <el-menu-item index="/">
-      <i class="el-icon-switch-button"></i>LogOut
-    </el-menu-item>
-    <el-menu-item index="5">
+    <el-menu-item index="/info/userinfo">
       <i class="el-icon-info"></i>Resume
     </el-menu-item>
     <el-menu-item index="5">
       <i class="el-icon-goblet"></i>About
+    </el-menu-item>
+    <el-menu-item index="/">
+      <i class="el-icon-switch-button"></i>LogOut
     </el-menu-item>
   </el-menu>
 </template>

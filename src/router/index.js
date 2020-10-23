@@ -19,6 +19,7 @@ import supplierList from '@/view/category/supplier/supplier';
 import appList from '@/view/category/applications/app';
 import assets from '@/view/category/assets/assets_home';
 import notebook from '@/view/category/notes/notebook';
+import userinfo from '@/view/category/info/user_info';
 
 Vue.use(Router)
 
@@ -120,6 +121,14 @@ const router = new Router({
       path: '/notebook/list',
       name: 'notebook',
       component: notebook,
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/info/userinfo',
+      name: 'userinfo',
+      component: userinfo,
       meta: {
         keepAlive: true
       }
