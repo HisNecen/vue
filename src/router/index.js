@@ -20,6 +20,7 @@ import appList from '@/view/category/applications/app';
 import assets from '@/view/category/assets/assets_home';
 import notebook from '@/view/category/notes/notebook';
 import userinfo from '@/view/category/info/user_info';
+import billboard from '@/view/category/billboard/billboard';
 
 Vue.use(Router)
 
@@ -129,6 +130,14 @@ const router = new Router({
       path: '/info/userinfo',
       name: 'userinfo',
       component: userinfo,
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/billboard/list',
+      name: 'billboard',
+      component: billboard,
       meta: {
         keepAlive: true
       }

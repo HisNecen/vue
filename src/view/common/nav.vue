@@ -10,6 +10,9 @@
       <template slot="title">
         <i class="el-icon-mouse"></i>业务
       </template>
+      <el-menu-item index="/billboard/list">
+        <i class="el-icon-question"></i>公示板
+      </el-menu-item>
       <el-menu-item index="/user/list">
         <i class="el-icon-s-platform"></i>服务器
       </el-menu-item>
@@ -17,7 +20,7 @@
         <i class="el-icon-goods"></i>供应商
       </el-menu-item>
       <el-menu-item index="/notebook/list">
-        <i class="el-icon-s-opportunity"></i>记事本
+        <i class="el-icon-notebook-1"></i>记事本
       </el-menu-item>
     </el-submenu>
     <el-submenu index="2">
@@ -42,6 +45,9 @@
       <template slot="title">
         <i class="el-icon-s-custom"></i>用户
       </template>
+      <el-menu-item index="/group/list">
+        <i class="el-icon-ship"></i>项目
+      </el-menu-item>
       <el-menu-item index="/user/list">
         <i class="el-icon-user"></i>用户
       </el-menu-item>
