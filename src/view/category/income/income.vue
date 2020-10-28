@@ -65,12 +65,13 @@
               </el-form-item>
               <el-form-item>
                 <el-button
-                  type="success"
-                  icon="el-icon-plus"
-                  @click="incomeEdit()"
-                  >添加</el-button
+                  type="primary"
+                  icon="el-icon-search"
+                  @click="onSubmit()"
+                  >查询</el-button
                 >
               </el-form-item>
+              
             </el-row>
             <el-row>
               <el-form-item label="付款方">
@@ -97,10 +98,10 @@
               </el-form-item>
               <el-form-item>
                 <el-button
-                  type="primary"
-                  icon="el-icon-search"
-                  @click="onSubmit()"
-                  >查询</el-button
+                  type="success"
+                  icon="el-icon-plus"
+                  @click="incomeEdit()"
+                  >添加</el-button
                 >
               </el-form-item>
             </el-row>

@@ -66,12 +66,13 @@
               </el-form-item>
               <el-form-item>
                 <el-button
-                  type="success"
-                  icon="el-icon-plus"
-                  @click="payRecodeEdit()"
-                  >添加</el-button
+                  type="primary"
+                  icon="el-icon-search"
+                  @click="onSubmit()"
+                  >查询</el-button
                 >
               </el-form-item>
+              
             </el-row>
             <el-row>
               <el-form-item label="收款方">
@@ -98,10 +99,10 @@
               </el-form-item>
               <el-form-item>
                 <el-button
-                  type="primary"
-                  icon="el-icon-search"
-                  @click="onSubmit()"
-                  >查询</el-button
+                  type="success"
+                  icon="el-icon-plus"
+                  @click="payRecodeEdit()"
+                  >添加</el-button
                 >
               </el-form-item>
             </el-row>
@@ -304,7 +305,6 @@ export default {
         },
       }).then((res) => {
         this.payRecodeList = res.data.data.payRecodeList;
-        console.log(this.incomeList);
       });
     },
     initPayRecodeTypeList: async function () {
