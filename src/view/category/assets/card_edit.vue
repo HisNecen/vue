@@ -144,6 +144,13 @@
           </el-form-item>
         </el-col>
       </el-row>
+      <el-row>
+        <el-col >
+          <el-form-item label="描述">
+            <el-input v-model="form.description" type="textarea"></el-input>
+          </el-form-item>
+        </el-col>
+      </el-row>
 
       <el-form-item>
         <el-button type="primary" @click="onSubmit()">{{ editName }}</el-button>
@@ -177,6 +184,7 @@ export default {
         cardPaypassword: "",
         rent: "",
         rentfrom: "",
+        description: "",
       },
       editProp: false,
       editName: "添加",
@@ -267,7 +275,7 @@ export default {
     addCard() {
       this.axios({
         method: "post",
-        url: "/myoa/smbus/card/addCard",
+        url: "/myoa/smbus/card/saveCard",
         data: {
           data: this.form,
         },
@@ -314,6 +322,8 @@ export default {
       this.form.cardPaypassword = "";
       this.form.rent = "";
       this.form.rentfrom = "";
+
+      this.description = "";
     },
   },
 };

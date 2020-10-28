@@ -4,18 +4,20 @@
       <div slot="header" class="clearfix">
         <span><el-tag type="danger">银行卡</el-tag> {{ item.name }}</span>
         <div style="float: right">
-          <el-button type="success" size="mini" @click="shareCard(item.id)"><i class="el-icon-share"></i></el-button>
+          <el-button type="success" size="mini" @click="shareCard(item.id)"
+            ><i class="el-icon-share"></i
+          ></el-button>
           <el-button type="primary" size="mini" @click="editCard(item.id)"
             ><i class="el-icon-edit"></i
           ></el-button>
-          <el-button type="danger" size="mini" @click="deleteCard(item.id)">
+          <el-button type="danger" size="mini" @click="deleteCard(item.id,item.name)">
             <i class="el-icon-delete"></i>
           </el-button>
         </div>
       </div>
       <div class="text item">
         <p><el-tag type="primary">账户卡号：</el-tag> {{ item.cardNumber }}</p>
-        <p><el-tag type="primary">开户银行：</el-tag> {{ item.bankName }}</p>
+        <p><el-tag type="primary">银行名称：</el-tag> {{ item.bankName }}</p>
         <p><el-tag type="primary">开户地址：</el-tag> {{ item.bankAddress }}</p>
       </div>
     </el-card>
@@ -31,9 +33,7 @@
       <div class="text item">
         <p><el-tag type="primary">提示：</el-tag> 银行卡为重要信息</p>
         <p><el-tag type="primary">提示：</el-tag> 请保证内容的正确性</p>
-        <p>
-          <el-tag type="primary">提示：</el-tag> 如有问题联系管理员
-        </p>
+        <p><el-tag type="primary">提示：</el-tag> 如有问题联系管理员</p>
       </div>
     </el-card>
     <!-- addOrUpdate -->
@@ -46,7 +46,8 @@ import addOrUpdate from "./card_edit";
 import cardShare from "./card_share";
 export default {
   components: {
-    addOrUpdate,cardShare
+    addOrUpdate,
+    cardShare,
   },
   data() {
     return {
@@ -70,25 +71,55 @@ export default {
         this.cardList = res.data.data.cardList;
       });
     },
-    deleteCard(id) {},
+    deleteCard(id,name) {
+
+      //普通调用方式
+      this.$confirm("将删除" + name + "卡片, 是否确定?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          this.axios({
+        method: "post",
+        url: "/myoa/smbus/card/deleteCard",
+        data: {
+          data: {
+            id: id
+          },
+        },
+      }).then((res) => {
+        this.$message("操作成功！");
+        this.initCardData();
+      });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除",
+          });
+        });
+
+      
+    },
     editCard(id) {
       this.editProp = true;
       this.$nextTick(() => {
-          this.$refs.addOrUpdate.initData(id);
-        });
+        this.$refs.addOrUpdate.initData(id);
+      });
     },
     addCard() {
       this.editProp = true;
       this.$nextTick(() => {
-          this.$refs.addOrUpdate.initData(null);
-        });
+        this.$refs.addOrUpdate.initData(null);
+      });
     },
     shareCard(id) {
-this.cardShare = true;
+      this.cardShare = true;
       this.$nextTick(() => {
-          this.$refs.cardShare.initCardData();
-        });
-    }
+        this.$refs.cardShare.initCardData(id);
+      });
+    },
   },
 };
 </script>

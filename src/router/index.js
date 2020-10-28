@@ -21,6 +21,9 @@ import assets from '@/view/category/assets/assets_home';
 import notebook from '@/view/category/notes/notebook';
 import userinfo from '@/view/category/info/user_info';
 import billboard from '@/view/category/billboard/billboard';
+import income from '@/view/category/income/income';
+import payout from '@/view/category/payout/payout';
+import report from '@/view/category/report/report_home';
 
 Vue.use(Router)
 
@@ -138,6 +141,30 @@ const router = new Router({
       path: '/billboard/list',
       name: 'billboard',
       component: billboard,
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/income/list',
+      name: 'income',
+      component: income,
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/payout/list',
+      name: 'payout',
+      component: payout,
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/report/list',
+      name: 'report',
+      component: report,
       meta: {
         keepAlive: true
       }

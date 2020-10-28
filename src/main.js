@@ -11,7 +11,9 @@ import 'element-ui/lib/theme-chalk/index.css';
 import axios from 'axios';
 //import utils
 import myutil from './view/util/dateutil';
-
+//import echarts
+import echarts from 'echarts';
+Vue.use(echarts);
 Vue.use(ElementUI);
 Vue.config.productionTip = false
 
@@ -31,7 +33,7 @@ axios.interceptors.request.use(config => {
 });
 
 
-
+Vue.prototype.$echarts = echarts;
 Vue.prototype.axios = axios;
 Vue.prototype.myutil = myutil;
 

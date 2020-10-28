@@ -128,7 +128,6 @@ export default {
     handleCurrentChange: function (currentPage) {
       this.currentPage = currentPage;
       this.initSupplierData();
-      console.log(this.currentPage); //点击第几页
     },
     dateFormat: function (row, column) {
       return util.dateFormatYMDHMS(row[column.property]);

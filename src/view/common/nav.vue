@@ -27,13 +27,13 @@
       <template slot="title">
         <i class="el-icon-orange"></i>财务
       </template>
-      <el-menu-item index="/user/list">
+      <el-menu-item index="/income/list">
         <i class="el-icon-download"></i>入账
       </el-menu-item>
-      <el-menu-item index="/role/list">
+      <el-menu-item index="/payout/list">
         <i class="el-icon-upload2"></i>出账
       </el-menu-item>
-      <el-menu-item index="/permission/list">
+      <el-menu-item index="/report/list">
         <i class="el-icon-s-data"></i>报表
       </el-menu-item>
       <el-menu-item index="/assets/home">
