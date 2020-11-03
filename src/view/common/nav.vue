@@ -13,7 +13,7 @@
       <el-menu-item index="/billboard/list">
         <i class="el-icon-question"></i>公示板
       </el-menu-item>
-      <el-menu-item index="/user/list">
+      <el-menu-item index="/server/list">
         <i class="el-icon-s-platform"></i>服务器
       </el-menu-item>
       <el-menu-item index="/supplier/list">

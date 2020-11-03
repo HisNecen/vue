@@ -24,6 +24,7 @@ import billboard from '@/view/category/billboard/billboard';
 import income from '@/view/category/income/income';
 import payout from '@/view/category/payout/payout';
 import report from '@/view/category/report/report_home';
+import server from '@/view/category/server/server';
 
 Vue.use(Router)
 
@@ -165,6 +166,14 @@ const router = new Router({
       path: '/report/list',
       name: 'report',
       component: report,
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/server/list',
+      name: 'server',
+      component: server,
       meta: {
         keepAlive: true
       }

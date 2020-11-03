@@ -110,6 +110,11 @@
         </div>
       </el-col>
     </el-row>
+    <el-row>
+      <el-tag type="success" style="height:55px;width:33%;font-size:20px;padding:15px;" effect="light">￥月计：{{monthAmountAll}}</el-tag>
+      <el-tag type="info" style="height:55px;width:33%;font-size:20px;padding:15px;" effect="light">￥年计：{{yearAmountAll}}</el-tag>
+      <el-tag type="warning" style="height:55px;width:33%;font-size:20px;padding:15px;" effect="light">￥所有：{{amountAll}}</el-tag>
+    </el-row>
     <el-collapse accordion>
       <el-collapse-item v-for="item in payRecodeList" :key="item.id">
         <template slot="title">
@@ -232,6 +237,10 @@ export default {
       userList: [],
       groupList: [],
       supplireList: [],
+
+      monthAmountAll: null,
+      yearAmountAll: null,
+      amountAll: null,
     };
   },
   created() {
@@ -239,6 +248,10 @@ export default {
     this.initPayRecodeStatusList();
     this.initUserList();
     this.initSupplireList();
+
+    this.initMonthAmountAll();
+    this.initYearAmountAll();
+    this.initAmountAll();
   },
   mounted() {},
   methods: {
@@ -305,6 +318,46 @@ export default {
         },
       }).then((res) => {
         this.payRecodeList = res.data.data.payRecodeList;
+      });
+    },
+    initMonthAmountAll(){
+      var month = util.dateFormatYM(new Date());
+      this.axios({
+        method: "post",
+        url: "/myoa/smbus/payRecode/selectMonthAmountAll",
+        data: {
+          data: {
+            month: month,
+          },
+        },
+      }).then((res) => {
+        this.monthAmountAll = res.data.data.amount;
+      });
+    },
+    initYearAmountAll(){
+      var year = util.dateFormatY(new Date());
+      this.axios({
+        method: "post",
+        url: "/myoa/smbus/payRecode/selectYearAmountAll",
+        data: {
+          data: {
+            year: year+"",
+          },
+        },
+      }).then((res) => {
+        this.yearAmountAll = res.data.data.amount;
+      });
+    },
+    initAmountAll(){
+      this.axios({
+        method: "post",
+        url: "/myoa/smbus/payRecode/selectAmountAll",
+        data: {
+          data: {
+          },
+        },
+      }).then((res) => {
+        this.amountAll = res.data.data.amount;
       });
     },
     initPayRecodeTypeList: async function () {
