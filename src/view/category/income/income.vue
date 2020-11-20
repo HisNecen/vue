@@ -133,7 +133,7 @@
             }}</span>
             {{ item.bankname }}</span
           >
-          <span v-if="item.userIncome != null" style="width: 100px"
+          <span v-if="item.userIncome != null" 
             ><i class="el-icon-user" style="color: #daa520"></i> 收款人：{{
               item.userIncome.name
             }}</span
@@ -316,7 +316,6 @@ export default {
         },
       }).then((res) => {
         this.incomeList = res.data.data.incomeRecodeList;
-        console.log(this.incomeList);
       });
     },
     initMonthAmountAll(){

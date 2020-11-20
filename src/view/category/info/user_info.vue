@@ -24,7 +24,8 @@
             </div>
             <div>
               <el-tag>描述：</el-tag>
-              <el-tag type="info">{{ form.decription }}</el-tag>
+              <br/>
+              <span style="background-color: #f4f4f5;border-color: #e9e9eb;color: #909399;padding:8px;font-size:13px;line-height:30px;">{{ form.description }}</span>
             </div>
             <div>
               <el-tag>添加时间：</el-tag>
@@ -294,6 +295,9 @@ export default {
 </script>
 <style >
 .user_info_row div {
-  margin-top: 10px;
+  margin-top: 20px;
+}
+.user_info_row div .el-tag{
+  width:250px;
 }
 </style>

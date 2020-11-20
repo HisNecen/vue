@@ -134,7 +134,7 @@
             }}</span>
             {{ item.bankname }}</span
           >
-          <span v-if="item.userPay != null" style="width: 100px"
+          <span v-if="item.userPay != null" 
             ><i class="el-icon-user" style="color: #daa520"></i> 付款人：{{
               item.userPay.name
             }}</span
