@@ -2,9 +2,9 @@
   <div id="login">
     <el-container>
       <el-header style="text-align: center;margin-top: 90px;">
-        <img src="../../assets/logo.png" />
+        <img src="/static/images/AmaricanSpace.png" />
       </el-header>
-      <el-main style="width: 500px; margin: 0 auto; margin-top: 300px">
+      <el-main style="width: 500px; margin: 0 auto; margin-top: 350px">
         <el-form ref="form" :model="form" label-width="80px">
           <el-form-item label="名称">
             <el-input
